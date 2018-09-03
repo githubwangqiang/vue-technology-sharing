@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="./js/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- 模板 view-->
+		<div id="app" v-cloak>
+			<custom-com :test="abc">
+				<p>父组件：{{message}}</p>
+
+				<div slot="home">我要插入到home的插槽</div>
+			</custom-com>
+		</div>
+		<script>
+
+			//定义组件
+
+			Vue.component('custom-com',{
+				props:["test"],
+				data(){
+					return {
+						value: this.test,
+						message:"子组件的信息"
+					}
+				},
+				template:`
+					<div>
+						<p>{{ message }}</p>
+						<slot>我没有模板</slot>
+						<hr />
+						<slot name="home">我是home</slot>
+					</div>
+				`,
+				methods:{
+					changeAbc(){
+						//this.test = 10;
+
+						this.$emit("abc-change",10)
+					}
+				}
+			})
+
+			
+			// 数据 model
+			var data = {
+				message: '父组件的信息',
+				abc:"hello"
+			};
+			// vm view-model
+			var vm = new Vue({
+				el: "#app",
+				data: data,
+				methods:{
+					abcHandle(newValue){
+						console.log("子组件改数据了");
+						console.log(newValue);
+
+						this.abc = newValue
+					}
+				}
+			});
+
+
+
+		</script>
+	</body>
+</html>

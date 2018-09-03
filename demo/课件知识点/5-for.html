@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="./js/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- 模板 view-->
+		<div id="app">
+			<ul>
+				<input @keyup.13= "addNews"/>
+				<li v-for='value,index in list' @click="changeColor" :key='Math.random()'>
+				{{value.title}}
+				<input type="button" value="删除" @click="remove(index)" />
+				</li>
+			</ul>
+		</div>
+		<script>
+			// 数据 model
+			var data = {
+				list:[
+				{
+					title:"test1"
+				},
+				{
+					title:"test2"
+				},
+				{
+					title:"test3"
+				}
+				]
+			};
+			var vm = new Vue({
+				el: "#app",
+				data: data,
+				methods:{
+					addNews(ev){
+						//this -> 实例对象
+
+
+						this.list.push({
+							title: ev.target.value
+						})
+					},
+					changeColor(ev){
+						ev.target.style.color = "red";
+					},
+					remove(index){
+						this.list.splice(index,1)
+					}
+				}
+			});
+
+
+		</script>
+	</body>
+</html>

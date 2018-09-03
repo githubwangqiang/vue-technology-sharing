@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="./js/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- 模板 view-->
+		<div id="app" v-cloak>
+			<custom-com></custom-com>
+			<custom-com2></custom-com2>
+			<custom-coms></custom-coms>
+		</div>
+		<script>
+
+			//定义组件
+
+	
+
+			Vue.component('custom-com',{
+				data(){
+					return {
+						test:"hello"
+					}
+				},
+				template:`
+					<div>我是组件{{test}}</div>
+				`
+			})
+
+			Vue.component('custom-com2',{
+				data(){
+					return {
+						test:"hello"
+					}
+				},
+				template:`
+					<div>
+						<div>我是组件-custom-com2{{test}}</div>
+						<input type="button" value="改变数据"
+							@click="test=123"
+						 />
+					</div>
+				`
+			})
+			
+			// 数据 model
+			var data = {
+				message: 'hello'
+			};
+			// vm view-model
+			var vm = new Vue({
+				el: "#app",
+				data: data,
+				components:{
+					'custom-coms': {
+						template:`
+						<div>我是局部组件</div>
+					`
+					}
+				}
+			});
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="./js/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- 模板 view-->
+		<div id="app" v-cloak>
+			<input v-model="message" /><br/>
+			{{message}}<br/>
+			{{ reverseMes }}
+			<hr>
+			<p>改变计算属性</p>
+			<input type="button" value="改变" @click=" reverseMes='world' " />
+		</div>
+		<script>
+			/*
+				计算属性
+					get
+					set
+				如果只写一个函数 get
+			*/
+			// 数据 model
+			var data = {
+				message: 'hello'
+			};
+			// vm view-model
+			var vm = new Vue({
+				el: "#app",
+				data: data,
+				computed: {
+					reverseMes:{
+						get(){
+							console.log("get");
+							return this.message.split("").reverse().join("")
+						},
+						set(newValue){
+							console.log(newValue);
+							this.message = newValue;
+						}
+					}
+				},
+				methods:{
+				}
+			});
+
+		</script>
+	</body>
+</html>

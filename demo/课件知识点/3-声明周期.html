@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="./js/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- 模板 view-->
+		<div id="loading">loading....</div>
+		<div id="app" v-cloak>
+			{{message}}
+			<div>1111</div>
+		</div>
+		<script>
+			// 数据 model
+			var data = {
+				message: ''
+			};
+			// vm view-model
+			var vm = new Vue({
+				data: data,
+				beforeCreate(){
+					console.log("数据绑定前");
+					console.log(this.message );
+					console.log("-------------------");
+				},
+				created(){
+					console.log("数据绑定后");
+					console.log( this.message );
+					console.log( this.$el );
+					console.log("-------------------");
+				},
+				beforeMount(){
+					console.log("挂载之前");
+					console.log( this.$el );
+					console.log("-------------------");
+				},
+				mounted(){
+					console.log("挂载之后");
+					console.log( this.$el );
+					console.log("-------------------");
+
+					loading.style.display = 'none';
+
+					//获取数据 发送ajax请求
+					setTimeout( () => {
+						var obj = {message:"我是从服务端来得"}
+						this.message = obj.message;
+					},2000)
+				},
+				beforeUpdate(){
+					console.log("更新之前");
+					console.log( this.message );
+					console.log("-------------------");
+				},
+				updated (){
+					console.log("更新之后");
+					console.log( this.message );
+					console.log("-------------------");
+				},
+				beforeDestroy(){
+					console.log("销毁前");
+					console.log("-------------------");
+				},
+				destroyed(){
+					console.log("销毁后");
+				}
+			});
+
+			vm.$mount("#app");
+
+			/*setTimeout(function (){
+				vm.message = 'hello';
+				vm.$mount("#app");
+			},2000)*/
+
+		</script>
+	</body>
+</html>

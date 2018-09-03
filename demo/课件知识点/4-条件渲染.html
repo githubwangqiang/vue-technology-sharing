@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="./js/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- 模板 view-->
+		<div id="app" v-cloak>
+			<h2>请选择：</h2>
+			<label>
+				<input type="radio" v-model='value' value="css" name="fe">
+				<span>css</span>
+			</label>
+			<label>
+				<input type="radio" v-model='value' value="Javascript" name="fe">
+					<span>Javascript</span>
+				</label>
+			<label>
+				<input type="radio" v-model='value' name="fe" value="nodejs">
+				<span>nodejs</span>
+			</label>
+			<hr>
+			<p>您选择了：{{value}}</p>
+			<p v-if='value == "css" '>
+				你要具备编写html的能力
+			</p>
+			<p v-else-if='value === "Javascript" '>
+				你要具备编写html+css的能力
+			</p>
+			<p v-else-if='value === "nodejs" '>
+				你要具备编写js的能力
+			</p>
+			<p v-else :style="{color:'red'}">
+				还没选择
+			</p>
+		</div>
+		<script>
+			// 数据 model
+			var data = {
+				value: ''
+			};
+			// vm view-model
+			var vm = new Vue({
+				el: "#app",
+				data: data,
+				
+			});
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="./js/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- 模板 view-->
+		<div id="app" v-cloak>
+			<custom-com :test="abc" @abc-change="abcHandle"></custom-com>
+			<custom-com test="miaov"></custom-com>
+		</div>
+		<script>
+
+			//定义组件
+
+			Vue.component('custom-com',{
+				props:["test"],
+				data(){
+					return {
+						value: this.test
+					}
+				},
+				template:`
+					<div>
+						<p>{{test}}</p>
+						<input type="button" @click="value=123" />
+						<input type="button" value="通知父组件" @click="changeAbc" />
+					</div>
+				`,
+				methods:{
+					changeAbc(){
+						//this.test = 10;
+
+						this.$emit("abc-change",10)
+					}
+				}
+			})
+
+			Vue.component('custom-com',{
+				props:["test"],
+				data(){
+					return {
+						value: this.test
+					}
+				},
+				template:`
+					<div>
+						<p>{{test}}</p>
+						<input type="button" @click="value=123" />
+						<input type="button" value="通知父组件" @click="changeAbc" />
+					</div>
+				`,
+				methods:{
+					changeAbc(){
+						//this.test = 10;
+
+						this.$emit("abc-change",10)
+					}
+				}
+			})
+
+			
+			// 数据 model
+			var data = {
+				message: 'hello',
+				abc:"hello"
+			};
+			// vm view-model
+			var vm = new Vue({
+				el: "#app",
+				data: data,
+				methods:{
+					abcHandle(newValue){
+						console.log("子组件改数据了");
+						console.log(newValue);
+
+						this.abc = newValue
+					}
+				}
+			});
+
+
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,15 @@
+.bowerrc
+.DS_Store
+.editorconfig
+node_modules
+npm-debug.log
+.idea
+.vscode
+.project
+log.md
+/*/coverage
+jsconfig.json
+dist
+yarn.lock
+/*/seleniumOutput/errorShots/*.png
+/*/seleniumOutput/junit/*.xml

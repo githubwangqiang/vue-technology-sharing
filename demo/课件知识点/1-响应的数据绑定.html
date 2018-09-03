@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./js/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- 模板 view-->
+		<div id="app">
+			{{ message }}
+		</div>
+		<script>
+
+			// 数据 + 模板 => 视图
+
+			// 数据 model
+			var data = {
+				message: 'hello'
+			};
+			// vm view-model
+			var vm = new Vue({
+				el: '#app',  //模板的挂载点
+				data: data,  //数据
+				methods:{
+					
+				}
+			});
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="./js/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- 模板 view-->
+		<div id="app" v-cloak>
+			<custom-async></custom-async>
+			<custom-async></custom-async>
+			<custom-async></custom-async>
+			<custom-async></custom-async>
+		</div>
+		<script>
+			function service(){
+				return {
+					template : '<div>我是自定义的异步组件</div>'
+				}
+			}
+			//自定义全局的组件
+			Vue.component("custom-async", function (resolve){
+				//模拟ajax请求
+				console.log(123);
+				setTimeout(function (){
+					resolve(service())	
+				},2000)
+			});
+			// 数据 model
+			var data = {
+				message: 'hello',
+				show: false
+			};
+			// vm view-model
+			var vm = new Vue({
+				el: "#app",
+				data: data
+			});
+
+		</script>
+	</body>
+</html>

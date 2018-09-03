@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="./js/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- 模板 view-->
+		<div id="app" v-cloak>
+			{{ message }}
+			<div v-bind:mes="message">作为我的属性值</div>
+			<div :mes="message">作为我的属性值</div>
+		</div>
+		<script>
+			// 数据 model
+			var data = {
+				message: 'hello'
+			};
+			// vm view-model
+			var vm = new Vue({
+				data: data,
+
+			});
+
+			vm.$mount("#app");
+
+		</script>
+	</body>
+</html>

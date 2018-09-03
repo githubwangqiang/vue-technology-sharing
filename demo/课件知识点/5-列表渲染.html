@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="./js/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- 模板 view-->
+		<div id="app" v-cloak>
+			<input  v-model="addNews" @keyup.13='addNewsAction' />
+			<ul>
+				<li v-for='item,index in list' @click='addStyle' :key='Math.random()' :a='index'>
+					{{item.title}} 
+					<input type="button" value="删除" @click='removeNews(index)' />
+				</li>
+			</ul>
+		</div>
+		<script>
+
+			// 数据 model
+			var data = {
+				title: '新闻列表',
+				addNews: '',
+				list: [
+					{
+						title: '活动1'
+					},
+					{
+						title: '活动2'
+					},
+					{
+						title: '活动3'
+					}
+				]
+			};
+			// vm view-model
+			var vm = new Vue({
+				el: "#app",
+				data: data,
+				methods: {
+					addNewsAction(){
+						this.list.push({
+							title: this.addNews
+						})
+					},
+					addStyle(ev){
+						ev.target.style.background = 'red';
+					},
+					removeNews(index){
+						this.list.splice(index,1);
+					}
+				}
+			});
+
+		</script>
+	</body>
+</html>
